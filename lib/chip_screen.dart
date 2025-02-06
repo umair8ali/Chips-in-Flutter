@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:implementation_chips/new_screen.dart';
 import 'package:implementation_chips/row_data.dart';
 
 class ChipScreen extends StatefulWidget {
@@ -55,8 +56,16 @@ class _ChipScreenState extends State<ChipScreen> {
                     final type = rowData[index].buttonType;
                     switch (type) {
                       case ButtonType.chip:
-                        return Chip(
-                          label: Text(rowData[index].chipButton),
+                        return TextButton(
+                          child: Text(rowData[index].chipButton),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewScreen(),
+                              ),
+                            );
+                          },
                         );
                       case ButtonType.inputChip:
                         return InputChip(
