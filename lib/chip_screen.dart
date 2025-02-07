@@ -56,7 +56,7 @@ class _ChipScreenState extends State<ChipScreen> {
                     final type = rowData[index].buttonType;
                     switch (type) {
                       case ButtonType.chip:
-                        return TextButton(
+                        return ElevatedButton(
                           child: Text(rowData[index].chipButton),
                           onPressed: () {
                             Navigator.push(
