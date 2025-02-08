@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:implementation_chips/ButtonScreens/HomePage/new_home_page.dart';
-import 'package:implementation_chips/ButtonScreens/HomePage/new_setting_page.dart';
+import 'package:implementation_chips/ButtonScreens/HomePage/home_page.dart';
+import 'package:implementation_chips/ButtonScreens/HomePage/profile_page.dart';
+import 'package:implementation_chips/ButtonScreens/HomePage/setting_page.dart';
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
@@ -10,73 +11,17 @@ class NewScreen extends StatefulWidget {
 }
 
 class _NewScreenState extends State<NewScreen> {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
+
+  void onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Home Page', style: TextStyle(fontSize: 24)),
-            ElevatedButton(
-              child: Text('Click'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NewHomePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Setting Page', style: TextStyle(fontSize: 24)),
-          ElevatedButton(
-            child: Text('Click'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewSettingPage(),
-                ),
-              );
-            },
-          ),
-        ],
-      )),
-      Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Profile Page', style: TextStyle(fontSize: 24)),
-          ElevatedButton(
-            child: Text('Click'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewSettingPage(),
-                ),
-              );
-            },
-          ),
-        ],
-      )),
-    ];
-
-    void onItemTapped(int index) {
-      setState(() {
-        selectedIndex = index;
-      });
-    }
+    final List<Widget> pages = [HomePage(), ProfilePage(), SettingPage()];
 
     return Scaffold(
       appBar: AppBar(
@@ -90,9 +35,9 @@ class _NewScreenState extends State<NewScreen> {
         backgroundColor: Colors.cyan,
         foregroundColor: Colors.white,
       ),
-      body: pages[selectedIndex],
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+        currentIndex: _selectedIndex,
         onTap: onItemTapped,
         selectedItemColor: Colors.teal,
         unselectedItemColor: Colors.grey,
